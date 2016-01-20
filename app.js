@@ -24,5 +24,24 @@ var submit = document.querySelector('#submit');
 You'll probably find this function useful...
  */  
 submit.onclick = function () {
-    
+    if(firstPasswordInput.value.length < 16) {
+        firstPasswordInput.setCustomValidity("More than 16 digits please.");
+    }else if(firstPasswordInput.value.length > 100) {
+        firstPasswordInput.setCustomValidity("Less than 100 digits please.");
+    }else if(!firstPasswordInput.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
+        firstPasswordInput.setCustomValidity("Must match one of the required symbols: ! @ # $ % ^ & *");
+    }else if(!firstPasswordInput.value.match(/[0-9]/g)) {
+        firstPasswordInput.setCustomValidity("Must match one of the required numbers: 0-9");
+    }else if(!firstPasswordInput.value.match(/[a-z]/g)) {
+        firstPasswordInput.setCustomValidity("Must include a lowercase letter");
+    }else if(!firstPasswordInput.value.match(/[A-Z]/g)) {
+        firstPasswordInput.setCustomValidity("Must include a uppercase letter");
+    }else if(firstPasswordInput.value.match(/[^A-z0-9\!\@\#\$\%\^\&\*]/g)) {
+        firstPasswordInput.setCustomValidity("illegal");
+    }else if(secondPasswordInput.value != firstPasswordInput.value) {
+        secondPasswordInput.setCustomValidity("Non-matching password.");
+    }else{
+        firstPasswordInput.setCustomValidity("");
+        secondPasswordInput.setCustomValidity("");
+    };
 };
